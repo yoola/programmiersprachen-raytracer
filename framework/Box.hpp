@@ -9,11 +9,14 @@
 class Box : public Shape{
 
 public:
-	Box() : min_(), max_(){}
+	Box() : min_(0,0,0), max_(0,0,0){}
 	Box(glm::vec3 min, glm::vec3 max) : min_(min), max_(max){}
 	~Box(){}
 	glm::vec3 getmin() const;
 	glm::vec3 getmax() const;
+	double getlength() const;
+	double getwidth() const;
+	double getheight() const;
 	double area() const override;
 	double volumen() const override;
 

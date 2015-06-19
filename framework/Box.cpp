@@ -1,26 +1,40 @@
 #include "Box.hpp"
 #include <glm/vec3.hpp>
+#include <stdio.h>
+#include <math.h> 
+#include <stdlib.h>
 
 glm::vec3 Shape::Box::getmin() const{
 
 	return min_;
 }
 
-double Shape::Box::getmax() const{
+glm::vec3 Shape::Box::getmax() const{
 
 	return max_;
 }
 
+double Shape::Box::getlength() const{
+
+	return abs(min_.x - max_.x);
+}
+
+double Shape::Box::getwidth() const{
+
+	return abs(min_.y - max_.y);
+}
+
+double Shape::Box::getheight() const{
+
+	return abs(min_.z - max_.z);
+}
+
 double Shape::Box::area() const override{
 
-	double d = max - min;
-
-	
-
-	return 4*pi*radius_*radius_;
+	return 2*(length_*height_)+2*(width_*height_)+2*(length_*width_);
 }
 
 double Shape::Box::volumen() const override{
 
-	return (4/3)*pi*radius_*radius_*radius_;
+	return length_*width_*height_;	
 }
