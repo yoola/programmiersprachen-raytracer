@@ -2,23 +2,26 @@
 
 #include <glm/vec3.hpp>
 
+Sphere::Sphere() : Shape(), center_(0,0,0), radius_(0){}
+Sphere::Sphere(glm::vec3 center, double radius) : center_(center), radius_(radius){}
+Sphere::~Sphere(){}
 
-glm::vec3 Shape::Sphere::getcenter() const{
+glm::vec3 Sphere::getcenter() const{
 
 	return center_;
 }
 
-double Shape::Sphere::getradius() const{
+double Sphere::getradius() const{
 
 	return radius_;
 }
 
-double Shape::Sphere::area() const override{
+double Sphere::area() const{
 
 	return 4*pi*radius_*radius_;
 }
 
-double Shape::Sphere::volumen() const override{
+double Sphere::volumen() const{
 
 	return (4/3)*pi*radius_*radius_*radius_;
 }
