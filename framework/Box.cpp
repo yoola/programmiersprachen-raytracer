@@ -3,9 +3,11 @@
 #include <stdio.h>
 #include <math.h> 
 #include <stdlib.h>
+#include <string>
 
 Box::Box() : Shape(), min_(0,0,0), max_(0,0,0){}
-Box::Box(glm::vec3 min, glm::vec3 max) : min_(min), max_(max){}
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Color const& color) : 
+Shape(name, color), min_(min), max_(max){}
 Box::~Box(){}
 
 glm::vec3 Box::getmin() const{
@@ -35,10 +37,10 @@ double Box::getheight() const{
 
 double Box::area() const{
 
-	return 2*(length_*height_)+2*(width_*height_)+2*(length_*width_);
+	return 2*(getlength()*getheight())+2*(getwidth()*getheight())+2*(getlength()*getwidth());
 }
 
-double Box::volumen() const{
+double Box::volume() const{
 
-	return length_*width_*height_;	
+	return getlength()*getwidth()*getheight();	
 }

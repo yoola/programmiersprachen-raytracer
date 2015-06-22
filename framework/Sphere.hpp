@@ -12,16 +12,17 @@ class Sphere : public Shape{
 
 public:
 	Sphere();
-	Sphere(glm::vec3 center, double radius);
+	Sphere(glm::vec3 const& center, double radius, std::string const& name, Color const& color);
 	~Sphere();
 	glm::vec3 getcenter() const;
 	double getradius() const;
 	double area() const override;
-	double volumen() const override;
+	double volume() const override;
+	//std::ostream& print(std::ostream& os) const override;
 
 private:
 	glm::vec3 center_;
 	double radius_;
 };
 
-#endif BUW_SPHERE_HPP
+#endif

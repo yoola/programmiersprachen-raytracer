@@ -10,7 +10,7 @@ class Box : public Shape{
 
 public:
 	Box();
-	Box(glm::vec3 min, glm::vec3 max);
+	Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Color const& color);
 	~Box();
 	glm::vec3 getmin() const;
 	glm::vec3 getmax() const;
@@ -18,7 +18,7 @@ public:
 	double getwidth() const;
 	double getheight() const;
 	double area() const override;
-	double volumen() const override;
+	double volume() const override;
 
 
 
@@ -27,4 +27,4 @@ private:
 	glm::vec3 max_;
 };
 
-#endif BUW_BOX_HPP
+#endif
