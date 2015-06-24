@@ -1,8 +1,17 @@
 #include <Shape.hpp>
 
-Shape::Shape(): name_(), color_(0,0,0){}
-Shape::Shape(std::string const& name, Color const& color) : name_(name), color_(color){}
-Shape::~Shape(){}
+Shape::Shape(): name_(), color_(0,0,0){
+
+	std::cout<<"Constructor of class Shape. "<<std::endl;
+}
+Shape::Shape(std::string const& name, Color const& color) : name_(name), color_(color){
+
+	std::cout<<"Constructor of class Shape. "<<std::endl;
+}
+Shape::~Shape(){
+
+	std::cout<<"Destructor of class Shape. "<<std::endl;
+}
 
 std::string const& Shape::getname() const{
 
@@ -16,7 +25,7 @@ Color const& Shape::getcolor() const{
 
 std::ostream& Shape::print(std::ostream& os) const{
 
-	os<<"Name: " << name_;
+	os<<"Name: " << name_<<"\n";
 	os<<"Farbe: "<<color_ ;
 	return os;
 }

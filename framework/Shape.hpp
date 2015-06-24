@@ -15,7 +15,7 @@ private:
 public:
 	Shape();
 	Shape(std::string const& name, Color const& color);
-	~Shape();
+	virtual ~Shape();
 	std::string const& getname() const;
 	Color const& getcolor() const;
 	virtual double area() const = 0;

@@ -5,10 +5,19 @@
 #include <stdlib.h>
 #include <string>
 
-Box::Box() : Shape(), min_(0,0,0), max_(0,0,0){}
+Box::Box() : Shape(), min_(0,0,0), max_(0,0,0){
+
+	std::cout<<"Constructor of class Box. "<<std::endl;
+}
 Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Color const& color) : 
-Shape(name, color), min_(min), max_(max){}
-Box::~Box(){}
+Shape(name, color), min_(min), max_(max){
+
+	std::cout<<"Constructor of class Box. "<<std::endl;
+}
+Box::~Box(){
+
+	std::cout<<"Destructor of class Box. "<<std::endl;
+}
 
 glm::vec3 Box::getmin() const{
 
@@ -43,4 +52,23 @@ double Box::area() const{
 double Box::volume() const{
 
 	return getlength()*getwidth()*getheight();	
+}
+
+std::ostream& Box::print(std::ostream& os) const{
+
+	Shape::print(os);
+	os<<"Minimum: "<<min_.x<<", " <<min_.y<<", "<<min_.z<<"\n";
+	os<<"Maximum: "<<max_.x<<", " <<max_.y<<", "<<max_.z<<"\n";
+	return os;
+}
+
+bool Box::intersect(Ray const& r){
+
+	glm::vec3 norm_d=glm::normalize(r.direction_);
+
+	float dist;
+
+	return glm::intersectRaySphere(
+		r.origin_, norm_d,
+		center_, radius_, dist);
 }

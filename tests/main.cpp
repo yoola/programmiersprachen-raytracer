@@ -4,7 +4,10 @@
 #include "Shape.hpp"
 #include "Sphere.hpp"
 #include "Box.hpp"
+#include "Ray.hpp"
 #include <glm/vec3.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
 
 TEST_CASE("Box_Constructor", "[Box_Constructor]") {
@@ -74,6 +77,55 @@ TEST_CASE("Box_Constructor", "[Box_Constructor]") {
     REQUIRE( b.getname() == "Box1");
  }
 
+
+TEST_CASE("print out object of Sphere", "[print and os method]") {
+    
+    glm::vec3 center(5,4,1);
+    double radius=3;
+    Sphere s(center,radius, "Sphere2", Color(0,0,1));
+    std::cout<<s<<std::endl;
+ }
+
+ TEST_CASE("print out object of Box", "[print and os method]") {
+    
+    glm::vec3 min(1,1,1);
+    glm::vec3 max(2,2,2);
+    Box b(min, max, "Box1", Color(0,1,0));
+    std::cout<<b<<std::endl;
+ }
+
+ TEST_CASE("intersection of Sphere and Ray", "[intersect]")
+{
+    // Ray
+    glm::vec3 ray_origin(0.0,0.0,0.0);
+    // ray direction has to be normalized ! // you can use:
+    // v = glm::normalize(some_vector) 
+    glm::vec3 ray_direction(0.0,0.0,1.0);
+
+    // Sphere
+    glm::vec3 sphere_center(0.0,0.0,5.0); 
+    float sphere_radius (1.0);
+
+    float distance (0.0);
+    auto result = glm::intersectRaySphere(
+        ray_origin , ray_direction , 
+        sphere_center , sphere_radius , 
+        distance );
+    REQUIRE(distance == Approx(4.0f)); 
+}
+
+TEST_CASE("order of constructor call", "[calling constructors]") {
+    
+    Color red(255, 0, 0);
+    glm::vec3 position(0,0,0);
+    Sphere* s1 = new Sphere(position, 1.2, "sphere0", red);
+    Shape* s2 = new Sphere(position, 1.2,"sphere1", red);
+    s1->print(std::cout); 
+    s2->print(std::cout);
+
+    delete s1;
+    delete s2;
+ }
 
 int main(int argc, char *argv[])
 {
