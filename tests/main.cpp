@@ -94,17 +94,38 @@ TEST_CASE("print out object of Sphere", "[print and os method]") {
     std::cout<<b<<std::endl;
  }
 
- TEST_CASE("intersection of Sphere and Ray", "[intersect]")
+ TEST_CASE("intersection of Box and Ray", "[intersect_box]")
+{
+    // Ray
+    glm::vec3 ray_origin(0.0,0.0,0.0);
+    // ray direction has to be normalized ! // you can use:
+    // v = glm::normalize(some_vector) 
+    glm::vec3 ray_direction(1.0,1.0,1.0);
+
+    Ray r(ray_origin, ray_direction);
+
+    // Box
+    glm::vec3 min(0,0,0);
+    glm::vec3 max(1,1,1);
+    Box b(min, max, "Box1", Color(0,1,0));
+
+
+    REQUIRE(b.intersect(r) == 1); 
+}
+
+TEST_CASE("intersection of Sphere and Ray", "[intersect_sphere]")
 {
     // Ray
     glm::vec3 ray_origin(0.0,0.0,0.0);
     // ray direction has to be normalized ! // you can use:
     // v = glm::normalize(some_vector) 
     glm::vec3 ray_direction(0.0,0.0,1.0);
+    Ray r(ray_origin, ray_direction);
 
     // Sphere
     glm::vec3 sphere_center(0.0,0.0,5.0); 
     float sphere_radius (1.0);
+    Sphere s(sphere_center,sphere_radius, "Sphere", Color(1,1,1));
 
     float distance (0.0);
     auto result = glm::intersectRaySphere(
@@ -112,6 +133,7 @@ TEST_CASE("print out object of Sphere", "[print and os method]") {
         sphere_center , sphere_radius , 
         distance );
     REQUIRE(distance == Approx(4.0f)); 
+    REQUIRE(s.intersect(r) == 1);
 }
 
 TEST_CASE("order of constructor call", "[calling constructors]") {
@@ -126,6 +148,9 @@ TEST_CASE("order of constructor call", "[calling constructors]") {
     delete s1;
     delete s2;
  }
+
+//Der Zeiger auf ein Objekt einer abgeleiteten Klasse kann überall verwendet werden,
+// wo ein Zeiger der Basisklasse verlangt wird.
 
 int main(int argc, char *argv[])
 {

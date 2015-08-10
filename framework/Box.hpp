@@ -2,6 +2,7 @@
 #define BUW_BOX_HPP
 
 #include "Shape.hpp"
+#include "Ray.hpp"
 
 #include <glm/vec3.hpp>
 

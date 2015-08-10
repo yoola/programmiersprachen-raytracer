@@ -19,7 +19,7 @@ Box::~Box(){
 	std::cout<<"Destructor of class Box. "<<std::endl;
 }
 
-glm::vec3 Box::getmin() const{
+glm::vec3 Box::getmin() const{ //per const reference zurückgeben!!!!
 
 	return min_;
 }
@@ -54,6 +54,15 @@ double Box::volume() const{
 	return getlength()*getwidth()*getheight();	
 }
 
+bool Box::intersect(Ray const& r){
+
+	float t = (min_.x - r.getorigin().x)/r.getdirection().x;
+
+	glm::vec3 result = r.getorigin() + t * r.getdirection();
+
+	return (result.y >= min_.y && result.y <= max_.y) && (result.z >= min_.z && result.z <= max_.z);
+}
+
 std::ostream& Box::print(std::ostream& os) const{
 
 	Shape::print(os);
@@ -62,13 +71,3 @@ std::ostream& Box::print(std::ostream& os) const{
 	return os;
 }
 
-bool Box::intersect(Ray const& r){
-
-	glm::vec3 norm_d=glm::normalize(r.direction_);
-
-	float dist;
-
-	return glm::intersectRaySphere(
-		r.origin_, norm_d,
-		center_, radius_, dist);
-}
