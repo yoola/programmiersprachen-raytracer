@@ -9,8 +9,8 @@ Box::Box() : Shape(), min_(0,0,0), max_(0,0,0){
 
 	std::cout<<"Constructor of class Box. "<<std::endl;
 }
-Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Color const& color) : 
-Shape(name, color), min_(min), max_(max){
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Material const& material) : 
+Shape(name, material), min_(min), max_(max){
 
 	std::cout<<"Constructor of class Box. "<<std::endl;
 }

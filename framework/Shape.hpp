@@ -2,22 +2,23 @@
 #define BUW_SHAPE_HPP
 
 #include <glm/glm.hpp>
-#include "color.hpp"
-#
+#include <Material.hpp>
+#include <string>
+
 
 class Shape{
 
 private:
 	std::string name_;
-	Color color_;
+	Material material_;
 	
 
 public:
 	Shape();
-	Shape(std::string const& name, Color const& color);
+	Shape(std::string const& name, Material const& material);
 	virtual ~Shape();
 	std::string const& getname() const;
-	Color const& getcolor() const;
+	Material const& getmaterial() const;
 	virtual double area() const = 0;
 	virtual double volume() const= 0;
 	virtual std::ostream& print(std::ostream& os) const; 

@@ -5,6 +5,7 @@
 #include "Ray.hpp"
 
 #include <glm/vec3.hpp>
+#include <string>
 
 
 #define pi 3.14159265359
@@ -17,7 +18,7 @@ private:
 
 public:
 	Sphere();
-	Sphere(glm::vec3 const& center, double radius, std::string const& name, Color const& color);
+	Sphere(glm::vec3 const& center, double radius, std::string const& name, Material const& material);
 	~Sphere();
 	glm::vec3 getcenter() const;
 	float getradius() const;

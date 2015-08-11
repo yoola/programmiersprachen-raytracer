@@ -1,10 +1,11 @@
 #include <Shape.hpp>
+#include <Material.hpp>
 
-Shape::Shape(): name_(), color_(0,0,0){
+Shape::Shape(): name_(), material_(){
 
 	std::cout<<"Constructor of class Shape. "<<std::endl;
 }
-Shape::Shape(std::string const& name, Color const& color) : name_(name), color_(color){
+Shape::Shape(std::string const& name, Material const& material) : name_(name), material_(material){
 
 	std::cout<<"Constructor of class Shape. "<<std::endl;
 }
@@ -18,15 +19,15 @@ std::string const& Shape::getname() const{
 	return name_;
 }
 
-Color const& Shape::getcolor() const{
+Material const& Shape::getmaterial() const{
 
-	return color_;
+	return material_;
 }
 
 std::ostream& Shape::print(std::ostream& os) const{
 
 	os<<"Name: " << name_<<"\n";
-	os<<"Farbe: "<<color_ ;
+	os<<"Farbe: "<<material_ ;
 	return os;
 }
 

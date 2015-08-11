@@ -5,6 +5,7 @@
 #include "Sphere.hpp"
 #include "Box.hpp"
 #include "Ray.hpp"
+#include "Material.hpp"
 #include <glm/vec3.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
@@ -16,7 +17,15 @@ TEST_CASE("Box_Constructor", "[Box_Constructor]") {
     glm::vec3 Null(0,0,0);
     glm::vec3 min(1,2,3);
     glm::vec3 max(4,4,5);
-	Box b2(min,max, "Box1", Color(1,1,1));
+
+    Color ka(1,0,0);
+    Color kd(0,1,0);
+    Color ks(1,1,1);
+    float m = 3.0f;
+    std::string name_material("Plastik");
+    Material material(name_material,ka,kd,ks,m);
+
+	Box b2(min,max, "Box1", material);
     REQUIRE( b1.getmin() == Null);
     REQUIRE( b1.getmax() == Null);
     REQUIRE( b2.getmin() == min);
@@ -29,7 +38,8 @@ TEST_CASE("Box_Constructor", "[Box_Constructor]") {
     glm::vec3 Null(0,0,0);
     glm::vec3 min(1,1,1);
     glm::vec3 max(2,2,2);
-    Box b2(min, max, "Box1", Color(1,1,1));
+
+    Box b2(min, max, "Box1", Material());
 
     REQUIRE( b1.area() == 0);
     REQUIRE( b1.volume() == 0);
@@ -41,7 +51,15 @@ TEST_CASE("Box_Constructor", "[Box_Constructor]") {
     
     glm::vec3 min(1,1,1);
     glm::vec3 max(2,2,2);
-    Box b1(min, max, "Box1", Color(1,1,1));
+
+    Color ka(1,0,0);
+    Color kd(0,1,0);
+    Color ks(1,1,1);
+    float m = 3.0f;
+    std::string name_material("Plastik");
+    Material material(name_material,ka,kd,ks,m);
+
+    Box b1(min, max, "Box1", material);
 
     REQUIRE( b1.getlength() == 1);
     REQUIRE( b1.getwidth() == 1);
@@ -54,7 +72,7 @@ TEST_CASE("Box_Constructor", "[Box_Constructor]") {
     glm::vec3 Null(0,0,0);
     glm::vec3 center(1,1,1);
     double radius=2;
-    Sphere s2(center,radius, "Sphere2", Color(1,1,1));
+    Sphere s2(center,radius, "Sphere2", Material());
 
     REQUIRE( s1.area() == 0);
     REQUIRE( s1.volume() == 0);
@@ -69,11 +87,9 @@ TEST_CASE("Box_Constructor", "[Box_Constructor]") {
 
  TEST_CASE("get name and color of class Shape", "[name and color getters]") {
     
-    Color c(0,1,0);
     glm::vec3 Null(0,0,0);
-    Box b(Null,Null,"Box1",c);
+    Box b(Null,Null,"Box1",Material());
 
-    REQUIRE( b.getcolor() == c);
     REQUIRE( b.getname() == "Box1");
  }
 
@@ -82,7 +98,7 @@ TEST_CASE("print out object of Sphere", "[print and os method]") {
     
     glm::vec3 center(5,4,1);
     double radius=3;
-    Sphere s(center,radius, "Sphere2", Color(0,0,1));
+    Sphere s(center,radius, "Sphere2", Material());
     std::cout<<s<<std::endl;
  }
 
@@ -90,7 +106,7 @@ TEST_CASE("print out object of Sphere", "[print and os method]") {
     
     glm::vec3 min(1,1,1);
     glm::vec3 max(2,2,2);
-    Box b(min, max, "Box1", Color(0,1,0));
+    Box b(min, max, "Box1", Material());
     std::cout<<b<<std::endl;
  }
 
@@ -107,7 +123,7 @@ TEST_CASE("print out object of Sphere", "[print and os method]") {
     // Box
     glm::vec3 min(0,0,0);
     glm::vec3 max(1,1,1);
-    Box b(min, max, "Box1", Color(0,1,0));
+    Box b(min, max, "Box1", Material());
 
 
     REQUIRE(b.intersect(r) == 1); 
@@ -125,7 +141,7 @@ TEST_CASE("intersection of Sphere and Ray", "[intersect_sphere]")
     // Sphere
     glm::vec3 sphere_center(0.0,0.0,5.0); 
     float sphere_radius (1.0);
-    Sphere s(sphere_center,sphere_radius, "Sphere", Color(1,1,1));
+    Sphere s(sphere_center,sphere_radius, "Sphere", Material());
 
     float distance (0.0);
     auto result = glm::intersectRaySphere(
@@ -136,17 +152,25 @@ TEST_CASE("intersection of Sphere and Ray", "[intersect_sphere]")
     REQUIRE(s.intersect(r) == 1);
 }
 
-TEST_CASE("order of constructor call", "[calling constructors]") {
+// TEST_CASE("order of constructor call", "[calling constructors]") {
     
-    Color red(255, 0, 0);
-    glm::vec3 position(0,0,0);
-    Sphere* s1 = new Sphere(position, 1.2, "sphere0", red);
-    Shape* s2 = new Sphere(position, 1.2,"sphere1", red);
-    s1->print(std::cout); 
-    s2->print(std::cout);
+//     Color red(255, 0, 0);
+//     glm::vec3 position(0,0,0);
+//     Sphere* s1 = new Sphere(position, 1.2, "sphere0", red);
+//     Shape* s2 = new Sphere(position, 1.2,"sphere1", red);
+//     s1->print(std::cout); 
+//     s2->print(std::cout);
 
-    delete s1;
-    delete s2;
+//     delete s1;
+//     delete s2;
+//  }
+
+TEST_CASE("print out object of Material", "[print and os method_material]") {
+
+    float m_ = 3.0f;
+    
+    Material m("Plastik", Color(0,1,0), Color(0,0,1), Color(1,1,1), m_);
+    std::cout<<m<<std::endl;
  }
 
 //Der Zeiger auf ein Objekt einer abgeleiteten Klasse kann überall verwendet werden,

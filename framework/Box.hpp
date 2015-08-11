@@ -5,6 +5,7 @@
 #include "Ray.hpp"
 
 #include <glm/vec3.hpp>
+#include <string>
 
 
 class Box : public Shape{
@@ -15,7 +16,7 @@ private:
 
 public:
 	Box();
-	Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Color const& color);
+	Box(glm::vec3 const& min, glm::vec3 const& max, std::string const& name, Material const& material);
 	~Box();
 	glm::vec3 getmin() const;
 	glm::vec3 getmax() const;
