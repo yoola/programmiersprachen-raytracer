@@ -26,6 +26,8 @@ public:
 	double area() const override;
 	double volume() const override;
 	std::ostream& print(std::ostream& os) const override;
-	bool intersect(Ray const& r);
+	bool intersect(Ray const& ray, float& t) override;
 };
+
+	glm::vec3 minus_vec(glm::vec3 a, glm::vec3 b);
 #endif

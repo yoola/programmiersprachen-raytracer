@@ -116,17 +116,32 @@ TEST_CASE("print out object of Sphere", "[print and os method]") {
     glm::vec3 ray_origin(0.0,0.0,0.0);
     // ray direction has to be normalized ! // you can use:
     // v = glm::normalize(some_vector) 
-    glm::vec3 ray_direction(1.0,1.0,1.0);
+    glm::vec3 ray_direction(0.0,0.0,1.0);
 
     Ray r(ray_origin, ray_direction);
 
     // Box
-    glm::vec3 min(0,0,0);
-    glm::vec3 max(1,1,1);
+    glm::vec3 min(-1,-1,5);
+    glm::vec3 max(1,1,4);
     Box b(min, max, "Box1", Material());
+    float t = 5.0f;
+
+    auto result = b.intersect(r,t);
+    REQUIRE(result == 1); 
+    REQUIRE(t == 4.0f); 
+}
 
 
-    REQUIRE(b.intersect(r) == 1); 
+TEST_CASE("Difference of two vectors", "[minus_vec]"){
+
+    glm::vec3 a(1,2,3);
+    glm::vec3 b(2,2,2);
+    auto result = minus_vec(a,b);
+
+    REQUIRE(result.x == -1); 
+    REQUIRE(result.y ==  0);
+    REQUIRE(result.z ==  1);
+
 }
 
 TEST_CASE("intersection of Sphere and Ray", "[intersect_sphere]")
@@ -143,13 +158,13 @@ TEST_CASE("intersection of Sphere and Ray", "[intersect_sphere]")
     float sphere_radius (1.0);
     Sphere s(sphere_center,sphere_radius, "Sphere", Material());
 
-    float distance (0.0);
+    float t (0.0);
     auto result = glm::intersectRaySphere(
         ray_origin , ray_direction , 
         sphere_center , sphere_radius , 
-        distance );
-    REQUIRE(distance == Approx(4.0f)); 
-    REQUIRE(s.intersect(r) == 1);
+        t );
+    REQUIRE(t == 4.0f); 
+    REQUIRE(s.intersect(r,t) == 1);
 }
 
 // TEST_CASE("order of constructor call", "[calling constructors]") {

@@ -1,8 +1,10 @@
 #ifndef BUW_SHAPE_HPP
 #define BUW_SHAPE_HPP
 
+#include "Material.hpp"
+#include "Ray.hpp"
+
 #include <glm/glm.hpp>
-#include <Material.hpp>
 #include <string>
 
 
@@ -22,6 +24,7 @@ public:
 	virtual double area() const = 0;
 	virtual double volume() const= 0;
 	virtual std::ostream& print(std::ostream& os) const; 
+	virtual bool intersect(Ray const& ray, float& t) = 0;
 };
 
 std::ostream& operator <<(std::ostream& os, Shape const& s);

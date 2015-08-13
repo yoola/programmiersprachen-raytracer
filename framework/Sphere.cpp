@@ -50,14 +50,12 @@ std::ostream& Sphere::print(std::ostream& os) const{
 	return os;
 }
 
-bool Sphere::intersect(Ray const& r){
+bool Sphere::intersect(Ray const& r, float& t){
 
 	glm::vec3 norm_d=glm::normalize(r.direction_);
 
-	float dist;
-
 	return glm::intersectRaySphere(
 		r.origin_, norm_d,
-		center_, radius_*radius_, dist);
+		center_, radius_*radius_, t);
 }
 
