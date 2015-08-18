@@ -16,8 +16,7 @@
 struct Scene{
 
 	Scene();
-	Scene(std::vector<Material> materials, std::vector<Shape*> shapes, 
-		std::vector<Light> light, Camera camera);
+	Scene(std::vector<Material> materials, std::vector<Shape*> shapes, std::vector<Light> light, Camera camera);
 	Scene(Scene const& scene);
 	~Scene();
 
@@ -26,8 +25,9 @@ struct Scene{
 	void addlight(std::vector<std::string> const& vec);
 	void addcamera(std::vector<std::string> const& vec);
 
+
 	std::vector<Material> materials_;
-	std::vector<Shape*> shapes_;
+	std::vector<Shape*> shapes_;  
 	std::vector<Light> light_;
 	Camera camera_;	
 };

@@ -1,14 +1,15 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
 
-#include "Shape.hpp"
-#include "Sphere.hpp"
-#include "Box.hpp"
 #include "Ray.hpp"
-#include "Material.hpp"
+#include "sdf_loader.hpp"
 #include <glm/vec3.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
+#include <iostream>     // std::cout
+#include <fstream> 
+#include <vector>
+#include <string>
 
 
 TEST_CASE("Box_Constructor", "[Box_Constructor]") {
@@ -188,6 +189,27 @@ TEST_CASE("print out object of Material", "[print and os method_material]") {
     std::cout<<m<<std::endl;
  }
 
+
+TEST_CASE("sdf loader and load scene", "[sdf and load") {
+
+    SDFLoader loader("BuildScene.txt");
+
+    std::vector<std::string> elems;
+
+    std::vector<Material> materials;
+    std::vector<Shape*> shapes;
+    std::vector<Light> light;
+    Camera camera;
+
+    Scene scene(materials, shapes,light,camera);
+
+    auto result = loader.load(scene);
+
+    std::cout<<result.materials_[0]<<std::endl;
+    std::cout<<*result.shapes_[0]<<std::endl;
+    std::cout<<result.light_[0]<<std::endl;
+    std::cout<<result.camera_<<std::endl;
+}
 //Der Zeiger auf ein Objekt einer abgeleiteten Klasse kann überall verwendet werden,
 // wo ein Zeiger der Basisklasse verlangt wird.
 

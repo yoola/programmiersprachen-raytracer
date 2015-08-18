@@ -25,8 +25,9 @@ public:
 	virtual double volume() const= 0;
 	virtual std::ostream& print(std::ostream& os) const; 
 	virtual bool intersect(Ray const& ray, float& t) = 0;
+	friend std::ostream& operator <<(std::ostream& os, Shape const& s);
 };
 
-std::ostream& operator <<(std::ostream& os, Shape const& s);
+
 
 #endif

@@ -34,9 +34,9 @@ std::ostream& Material::print(std::ostream& os) const{
 
 	//Shape::print(os);
 	os<<"Name des Materials: "<<name_<<"\n";
-	os<<"Ambiente Reflexion: "<<getka()<<"\n";
-	os<<"Diffuse Reflexion: "<<getkd()<<"\n";
-	os<<"Spiegelnde Reflexion: "<<getks()<<"\n";
+	os<<"Ambiente Reflexion: "<<ka_<<"\n";
+	os<<"Diffuse Reflexion: "<<kd_<<"\n";
+	os<<"Spiegelnde Reflexion: "<<ks_<<"\n";
 	os<<"Exponent der spiegelnden Reflexion: "<<m_<<"\n";
 	return os;
 }

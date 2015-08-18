@@ -2,6 +2,7 @@
 #define BUW_SDF_LOADER_HPP
 
 #include "Scene.hpp"
+//#include "BuildScene.txt"
 
 #include <string>
 #include <vector>

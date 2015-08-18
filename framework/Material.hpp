@@ -26,7 +26,8 @@ public:
 	Color getks() const;
 	float getm() const;
 	std::ostream& print(std::ostream& os) const;
+	friend std::ostream& operator <<(std::ostream& os, Material const& s);
 };
 
-	std::ostream& operator <<(std::ostream& os, Material const& s);
+	
 #endif

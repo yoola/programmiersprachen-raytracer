@@ -3,7 +3,7 @@
 SDFLoader::SDFLoader(){}
 SDFLoader::SDFLoader(std::string const& filename) : filename_(filename) {
 
-  objects_.open (filename_, std::fstream::in);
+  objects_.open (filename_, std::ifstream::in);
 
   if(!objects_.is_open()){
     std::cout<<"Cannot open file"<<filename_<<"."<<std::endl;

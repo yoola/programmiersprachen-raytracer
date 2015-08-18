@@ -20,6 +20,7 @@ void Scene::addmaterial(std::vector<std::string> const& vec){
 
 void Scene::addshape(std::vector<std::string> const& vec){
 
+
 		if(vec[2] == "box"){
 
 			Material tmp = *(std::find_if(std::begin(materials_), std::end(materials_), 
@@ -48,7 +49,7 @@ void Scene::addlight(std::vector<std::string> const& vec){
 
 void Scene::addcamera(std::vector<std::string> const& vec){
 	
-	Camera(vec[2], std::stof(vec[3]));
+	camera_= Camera(vec[2], std::stof(vec[3]));
 }
 
 
